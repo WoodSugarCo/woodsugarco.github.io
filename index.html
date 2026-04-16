@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wood Sugar Company — Heirloom Hardwood Tables</title>
+    <meta name="description" content="Heirloom hardwood dining tables built by hand in Chapin, South Carolina. Traditional joinery. Zero metal fasteners. Walnut and white oak, joined the old way.">
+    <meta property="og:title" content="Wood Sugar Company — Heirloom Hardwood Tables">
+    <meta property="og:description" content="Walnut and white oak dining tables, joined the old way. Chapin, South Carolina.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/hero-walnut.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        :root {
+            /* WSC Brand Colors — Locked March 2026 */
+            --ironwood: #1C1C1A;
+            --sc-indigo: #041E42;
+            --aged-brass: #8C7B45;
+            --linen: #F5F0E8;
+            --weathered-oak: #BDB8AC;
+
+            /* Functional mappings */
+            --bg-deep: var(--ironwood);
+            --bg-primary: #222220;
+            --bg-elevated: #2a2a28;
+            --bg-surface: #333330;
+            --text-primary: var(--linen);
+            --text-secondary: var(--weathered-oak);
+            --text-muted: #7a756d;
+            --brass: var(--aged-brass);
+            --brass-light: #a08f55;
+            --brass-dark: #756838;
+
+            /* WSC Type System — Locked March 2026 */
+            --display: 'IM Fell English', 'Georgia', serif;
+            --body: 'Crimson Pro', 'Georgia', serif;
+        }
+
+        body {
+            font-family: var(--body);
+            font-weight: 400;
+            color: var(--text-primary);
+            background-color: var(--bg-deep);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           SCROLL REVEAL ANIMATIONS
+           ======================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+
+        /* ========================================
+           HERO
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/hero-walnut.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35) saturate(0.8);
+            transform: scale(1.05);
+            transition: transform 8s ease-out;
+        }
+
+        .hero.loaded .hero-bg {
+            transform: scale(1);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .inverse-corners {
+            -webkit-mask-image:
+                radial-gradient(circle 14px at 0 0, transparent 98%, black),
+                radial-gradient(circle 14px at 100% 0, transparent 98%, black),
+                radial-gradient(circle 14px at 0 100%, transparent 98%, black),
+                radial-gradient(circle 14px at 100% 100%, transparent 98%, black),
+                linear-gradient(black, black);
+            -webkit-mask-composite: source-in, source-in, source-in, source-in;
+            mask-image:
+                radial-gradient(circle 14px at 0 0, transparent 98%, black),
+                radial-gradient(circle 14px at 100% 0, transparent 98%, black),
+                radial-gradient(circle 14px at 0 100%, transparent 98%, black),
+                radial-gradient(circle 14px at 100% 100%, transparent 98%, black),
+                linear-gradient(black, black);
+            mask-composite: intersect;
+        }
+
+        .hero-logo-plaque {
+            display: inline-block;
+            position: relative;
+            padding: 6px;
+            background: #1C1C1A;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+        }
+
+        .hero-logo-brass {
+            padding: 3px;
+            background: var(--aged-brass);
+        }
+
+        .hero-logo-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 3.5rem 1.8rem;
+            background: #1a1a1a;
+        }
+
+        .hero-logo {
+            width: 580px;
+            display: block;
+        }
+
+        .hero-headline {
+            font-family: var(--body);
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+        }
+
+        .hero-subline {
+            font-family: var(--body);
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-secondary);
+            letter-spacing: 0.04em;
+            text-transform: none;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            font-family: var(--body);
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--linen);
+            background-color: var(--brass);
+            padding: 1.3rem 3.8rem;
+            text-decoration: none;
+            border: 2px solid #1a1a1a;
+            box-shadow: 0 4px 16px rgba(140, 123, 69, 0.3);
+            transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
+        }
+
+        .hero-cta:hover {
+            background-color: var(--brass-light);
+            transform: translateY(-2px);
+            border-color: #1a1a1a;
+            box-shadow: 0 6px 24px rgba(140, 123, 69, 0.4);
+        }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            opacity: 0;
+            animation: heroFadeIn 1s ease 2s forwards;
+        }
+
+        .hero-scroll-hint span {
+            display: block;
+            width: 3px;
+            height: 120px;
+            background: linear-gradient(to bottom, var(--brass), transparent);
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           SECTIONS — SHARED
+           ======================================== */
+        section {
+            padding: 8rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-family: var(--body);
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-rule {
+            width: 60px;
+            height: 1px;
+            background-color: var(--brass);
+            border: none;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ========================================
+           SECTION 1 — THE WORK
+           ======================================== */
+        .the-work {
+            background-color: var(--bg-primary);
+        }
+
+        .the-work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .the-work-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .the-work-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.9) saturate(0.9);
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        filter 0.8s ease;
+        }
+
+        .the-work-image:hover img {
+            transform: scale(1.03);
+            filter: brightness(1) saturate(1);
+        }
+
+        .the-work-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(140, 123, 69, 0.15);
+            pointer-events: none;
+        }
+
+        .the-work-text p {
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            line-height: 1.85;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .the-work-text .on-the-bench {
+            font-family: var(--display);
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-style: normal;
+            color: var(--text-primary);
+            margin-top: 2rem;
+        }
+
+        /* ========================================
+           SECTION 2 — WHAT MAKES THIS DIFFERENT
+           ======================================== */
+        .different {
+            background-color: var(--bg-primary);
+            position: relative;
+        }
+
+        .different::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 900px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(140, 123, 69, 0.2), transparent);
+        }
+
+        .different-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 1rem;
+        }
+
+        .different-item {
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(140, 123, 69, 0.2);
+        }
+
+        .different-item h3 {
+            font-family: var(--body);
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.01em;
+        }
+
+        .different-item p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        /* ========================================
+           SECTION 3 — THE MAKER
+           ======================================== */
+        .the-maker {
+            background-color: var(--bg-deep);
+        }
+
+        .the-maker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .the-maker-image {
+            position: relative;
+            overflow: hidden;
+            order: 2;
+        }
+
+        .the-maker-image img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            filter: brightness(0.9) saturate(0.9);
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        filter 0.8s ease;
+        }
+
+        .the-maker-image:hover img {
+            transform: scale(1.03);
+            filter: brightness(1) saturate(1);
+        }
+
+        .the-maker-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(140, 123, 69, 0.15);
+            pointer-events: none;
+        }
+
+        .the-maker-text {
+            order: 1;
+        }
+
+        .the-maker-text p {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            line-height: 1.85;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .the-maker-text .on-the-bench {
+            font-family: var(--display);
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-style: normal;
+            color: var(--text-primary);
+            margin-top: 2rem;
+        }
+
+        /* ========================================
+           FORM SECTION
+           ======================================== */
+        .contact {
+            background-color: var(--bg-deep);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 900px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(140, 123, 69, 0.2), transparent);
+        }
+
+        .contact .section-inner {
+            max-width: 640px;
+            text-align: center;
+        }
+
+        .contact-subtext {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-family: var(--body);
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            background-color: var(--bg-elevated);
+            border: 1px solid var(--bg-surface);
+            outline: none;
+            transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--brass);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .form-group select option {
+            background-color: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            display: block;
+            width: 100%;
+            padding: 1.1rem 2rem;
+            font-family: var(--body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--bg-deep);
+            background-color: var(--brass);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.4s ease, transform 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .form-submit:hover {
+            background-color: var(--brass-light);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: var(--bg-deep);
+            border-top: 1px solid rgba(140, 123, 69, 0.1);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--brass);
+            transform: translateY(-2px);
+        }
+
+        .footer-social svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .footer-contact {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-contact a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--brass);
+        }
+
+        .footer-slogan {
+            font-family: var(--display);
+            font-size: 1.2rem;
+            font-style: normal;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .the-work-grid,
+            .the-maker-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .the-maker-image {
+                order: 0;
+            }
+
+            .the-maker-text {
+                order: 0;
+            }
+
+            .different-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .different-item {
+                padding: 2rem 0;
+            }
+
+            .hero-logo {
+                width: 260px;
+            }
+
+            .hero-logo-plaque {
+                padding: 1.5rem 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta {
+                padding: 0.9rem 2.2rem;
+            }
+        }
+
+        /* ========================================
+           NOISE TEXTURE OVERLAY (subtle grain)
+           ======================================== */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-logo-plaque inverse-corners">
+                <div class="hero-logo-brass inverse-corners">
+                    <div class="hero-logo-inner inverse-corners">
+                        <img src="images/logo-brass.svg" alt="Wood Sugar Company" class="hero-logo">
+                    </div>
+                </div>
+            </div>
+            <h1 class="hero-headline">Heirloom quality tables.<br>Built by hand. Zero metal fasteners.</h1>
+            <p class="hero-subline">Built for Generations<br>Chapin, South Carolina</p>
+            <a href="#contact" class="hero-cta">Get on the List</a>
+        </div>
+        <div class="hero-scroll-hint">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- ============ SECTION 1 — THE WORK ============ -->
+    <section class="the-work">
+        <div class="section-inner">
+            <div class="the-work-grid">
+                <div class="the-work-image reveal">
+                    <img src="images/joinery-piece.jpg" alt="Joinery piece with draw-bore pins on sawhorses in the Wood Sugar workshop" loading="lazy">
+                </div>
+                <div class="the-work-text">
+                    <h2 class="section-heading reveal">What We Build</h2>
+                    <hr class="section-rule reveal reveal-delay-1">
+                    <p class="reveal reveal-delay-2">Every table begins with locally sourced hardwoods. No veneers. No plywood. No metal fasteners. Traditional joinery executed by a craftsman building functional art&nbsp;&mdash; built to outlast the house it sits in.</p>
+                    <p class="on-the-bench reveal reveal-delay-3">Real wood. Real joinery. Real simple.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION 2 — THE MAKER ============ -->
+    <section class="the-maker">
+        <div class="section-inner">
+            <div class="the-maker-grid">
+                <div class="the-maker-text">
+                    <h2 class="section-heading reveal">Who's Behind the Bench</h2>
+                    <hr class="section-rule reveal reveal-delay-1">
+                    <p class="reveal reveal-delay-2">Right out of college, Cole went to work for Habitat for Humanity. Every year, Cole led crews salvaging antique heart pine floor joists from razed homes to build tables for Habitat's annual auction. He loved that part more than he expected.</p>
+                    <p class="reveal reveal-delay-3">A recently acquired MBA helped land Cole a job at PwC in the Cyber, Risk, Regulatory, and Financial Crimes practice. C-suite clients, big cities, fancy meals. The suits were sharp. The weekends were theoretical. He never put down his tools.</p>
+                    <p class="reveal reveal-delay-3">Then an unexpected layoff created an unexpected opportunity. When Cole told everyone he was leaving consulting to build furniture, the only surprise was that it took him this long.</p>
+                    <p class="reveal reveal-delay-3">Wood Sugar Company builds heirloom furniture to last generations. Solid hardwood. No metal fasteners. Handcrafted in Chapin, South&nbsp;Carolina.</p>
+                    <p class="on-the-bench reveal reveal-delay-3">Leave something that matters.</p>
+                </div>
+                <div class="the-maker-image reveal">
+                    <img src="images/walnut-grain.jpg" alt="Close-up of walnut grain showing the rich character of locally sourced hardwood" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION 3 — WHAT MAKES THIS DIFFERENT ============ -->
+    <section class="different">
+        <div class="section-inner">
+            <h2 class="section-heading reveal">How It's Different</h2>
+            <hr class="section-rule reveal reveal-delay-1">
+            <div class="different-grid">
+                <div class="different-item reveal reveal-delay-1">
+                    <h3>Traditional Joinery</h3>
+                    <p>Mortise and tenon. Dovetail. Draw-bore. The joints our great-grandfathers trusted&nbsp;&mdash; because they work.</p>
+                </div>
+                <div class="different-item reveal reveal-delay-2">
+                    <h3>Zero Metal Fasteners</h3>
+                    <p>Not a single screw, nail, or bolt in any piece. Every connection is wood to wood.</p>
+                </div>
+                <div class="different-item reveal reveal-delay-3">
+                    <h3>Locally Sourced Hardwood</h3>
+                    <p>Walnut, oak, and other reclaimed hardwoods from the Carolinas; milled and dried before they ever meet a hand plane.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT FORM ============ -->
+    <section class="contact" id="contact">
+        <div class="section-inner">
+            <h2 class="section-heading reveal">Start a Conversation</h2>
+            <hr class="section-rule reveal reveal-delay-1" style="margin-left: auto; margin-right: auto;">
+            <p class="contact-subtext reveal reveal-delay-2">Interested in a table? Tell us about your project.<br>No commitment&nbsp;&mdash; just a conversation.</p>
+
+            <form class="contact-form reveal reveal-delay-3" action="https://formspree.io/f/FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Your name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="project">What are you thinking about?</label>
+                    <textarea id="project" name="project" placeholder="Dining table for our new kitchen, walnut, seats 8..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="source">How did you find us?</label>
+                    <select id="source" name="source">
+                        <option value="" disabled selected>Select one</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="designer">Interior designer</option>
+                        <option value="referral">Friend or referral</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="form-submit">Send It</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://instagram.com/woodsugarco" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://youtube.com/@woodsugarco" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://facebook.com/woodsugarco" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://tiktok.com/@woodsugarco" target="_blank" rel="noopener" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <a href="https://pinterest.com/woodsugarco" target="_blank" rel="noopener" aria-label="Pinterest">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/></svg>
+            </a>
+        </div>
+        <p class="footer-contact">
+            <a href="mailto:hello@woodsugarco.com">hello@woodsugarco.com</a>
+            &nbsp;&middot;&nbsp;
+            Chapin, South Carolina
+        </p>
+        <p class="footer-slogan">Built for Generations</p>
+    </footer>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script>
+        // Hero slow zoom trigger
+        window.addEventListener('load', () => {
+            document.querySelector('.hero').classList.add('loaded');
+        });
+
+        // Scroll reveal with Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
