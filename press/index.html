@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Kit — Wood Sugar Company</title>
+    <meta name="description" content="Press kit for Wood Sugar Company — heirloom hardwood tables built by hand in Chapin, South Carolina. Boilerplate, founder bio, fast facts, images, and press contact.">
+    <meta property="og:title" content="Press Kit — Wood Sugar Company">
+    <meta property="og:description" content="Heirloom hardwood tables, joined the old way. Chapin, South Carolina. Press resources and contact.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../images/press-maker.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        :root {
+            --ironwood: #1C1C1A; --sc-indigo: #041E42; --aged-brass: #8C7B45; --linen: #F5F0E8; --weathered-oak: #BDB8AC;
+            --bg-deep: var(--ironwood); --bg-primary: #222220; --bg-elevated: #2a2a28;
+            --text-primary: var(--linen); --text-secondary: var(--weathered-oak); --text-muted: #7a756d;
+            --brass: var(--aged-brass); --brass-light: #a08f55;
+            --display: 'IM Fell English', 'Georgia', serif; --body: 'Crimson Pro', 'Georgia', serif;
+        }
+        body { font-family: var(--body); font-weight: 400; color: var(--text-primary); background-color: var(--bg-deep); line-height: 1.7; font-size: 16px; overflow-x: hidden; }
+        a { color: var(--brass-light); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--brass); }
+        .topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; border-bottom: 1px solid rgba(140,123,69,0.15); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+        .topbar a { color: var(--text-secondary); }
+        .kit-header { text-align: center; padding: 5rem 2rem 3.5rem; border-bottom: 1px solid rgba(140,123,69,0.12); }
+        .plaque { display:inline-block; padding:5px; background:#1C1C1A; }
+        .plaque-brass { padding:3px; background:var(--aged-brass); }
+        .plaque-inner { padding: 1.6rem 2.4rem 1.1rem; background:#1a1a1a; }
+        .plaque-inner img { width: 340px; max-width: 70vw; display:block; }
+        .kit-label { font-size: 0.85rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--brass); margin: 2.2rem 0 0.4rem; }
+        .kit-tagline { font-family: var(--display); font-style: normal; font-size: 1.5rem; color: var(--text-secondary); }
+        section { padding: 4.5rem 2rem; }
+        .inner { max-width: 880px; margin: 0 auto; }
+        .alt { background-color: var(--bg-primary); }
+        h2.heading { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.8rem; }
+        .rule { width: 56px; height: 1px; background: var(--brass); border: none; margin-bottom: 2rem; }
+        p { margin-bottom: 1.2rem; color: var(--text-secondary); }
+        .boiler { border-left: 2px solid var(--brass); padding: 0.4rem 0 0.4rem 1.6rem; font-size: 1.15rem; color: var(--text-primary); }
+        .closer { font-family: var(--display); font-style: normal; font-size: 1.5rem; color: var(--text-primary); margin-top: 1.5rem; }
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 1rem; }
+        .pillar { border-top: 1px solid rgba(140,123,69,0.25); padding-top: 1.4rem; }
+        .pillar h3 { font-weight: 500; font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.6rem; }
+        .pillar p { font-size: 0.95rem; margin: 0; }
+        .maker-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+        .maker-grid img { width: 100%; display: block; border: 1px solid rgba(140,123,69,0.18); }
+        .maker-cap { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem; }
+        .facts { width: 100%; border-collapse: collapse; }
+        .facts th, .facts td { text-align: left; padding: 0.7rem 0; border-bottom: 1px solid rgba(140,123,69,0.15); vertical-align: top; font-size: 0.98rem; }
+        .facts th { width: 34%; color: var(--text-muted); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.78rem; padding-top: 0.95rem; }
+        .facts td { color: var(--text-secondary); }
+        .quote { font-size: 1.35rem; line-height: 1.6; color: var(--text-primary); margin: 0 0 1.6rem; padding-left: 1.4rem; border-left: 2px solid var(--brass); }
+        .quote span { display:block; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.6rem; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .gallery figure { margin: 0; }
+        .gallery img { width: 100%; display: block; border: 1px solid rgba(140,123,69,0.18); }
+        .gallery figcaption { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem; }
+        .gallery .wide { grid-column: 1 / -1; }
+        .chairnote { font-size: 0.9rem; color: var(--text-secondary); font-style: italic; margin-top: 1.4rem; }
+        .usage { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.8rem; }
+        .release { background: var(--bg-elevated); border: 1px solid rgba(140,123,69,0.18); padding: 2.2rem 2.4rem; }
+        .release .stamp { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); margin-bottom: 1rem; }
+        .release h3 { font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 1.2rem; line-height: 1.3; }
+        .contact-block { text-align: center; }
+        .contact-email { font-size: 1.4rem; color: var(--text-primary); margin: 0.5rem 0 1.8rem; }
+        .social { display: flex; justify-content: center; gap: 1.4rem; margin-top: 1rem; }
+        .social a { color: var(--text-secondary); }
+        .social svg { width: 22px; height: 22px; }
+        footer { padding: 3.5rem 2rem; text-align: center; border-top: 1px solid rgba(140,123,69,0.12); }
+        .colophon-latin { font-family: var(--display); font-style: normal; font-size: 1.15rem; letter-spacing: 0.18em; color: var(--brass); }
+        .colophon-en { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; font-style: italic; }
+        .colophon-slogan { font-family: var(--display); font-style: normal; font-size: 1.25rem; color: var(--text-secondary); margin-top: 1.4rem; }
+        .colophon-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 1.4rem; letter-spacing: 0.05em; }
+        @media (max-width: 768px) {
+            .pillars { grid-template-columns: 1fr; gap: 0; }
+            .pillar { padding: 1.4rem 0; }
+            .maker-grid, .gallery { grid-template-columns: 1fr; }
+            .facts th { width: 42%; }
+        }
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .topbar { display: none; }
+            section { padding: 1.4rem 0; page-break-inside: avoid; }
+            body { font-size: 11pt; }
+        }
+        body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="../index.html">&larr; woodsugarco.com</a>
+        <span>Press &amp; Media Kit</span>
+    </div>
+
+    <header class="kit-header">
+        <div class="plaque"><div class="plaque-brass"><div class="plaque-inner">
+            <img src="../images/logo-brass.svg" alt="Wood Sugar Company">
+        </div></div></div>
+        <p class="kit-label">Press &amp; Media Kit</p>
+        <p class="kit-tagline">Built for Generations</p>
+    </header>
+
+    <!-- THE STUDIO -->
+    <section>
+        <div class="inner">
+            <h2 class="heading">The Studio</h2>
+            <hr class="rule">
+            <p class="boiler">Wood Sugar Company builds heirloom hardwood furniture in Chapin, South Carolina. Locally sourced. No metal fasteners. Traditional joinery. Founded in 2026 by Cole Fisher, a former PwC Risk and Regulatory Senior Manager who returned to his tools after a decade in consulting.</p>
+            <p style="margin-top:2rem;">Wood Sugar Company is a one-maker studio building farm tables in locally sourced hardwoods and reclaimed lumber — joined the old way, with mortise-and-tenon, draw-bored, and wedged through-tenons. Every piece is finished in plant-based hardwax oil and built to be passed down to future generations, along with the stories they've facilitated throughout the years.</p>
+            <p>Tables are the heart of the shop, but we try not to waste anything the tree gives us. The offcuts become cutting boards and smaller pieces — we use as much of every board as we can.</p>
+            <p>Every table carries a brass builder's plate engraved with the harvest location, species, finish, year built, the craftsman, the family it was built for, and a Latin inscription — <strong>RELINQUE &middot; QUOD &middot; DURAT</strong>, <em>&ldquo;Leave what endures.&rdquo;</em></p>
+        </div>
+    </section>
+
+    <!-- DIFFERENT -->
+    <section class="alt">
+        <div class="inner">
+            <h2 class="heading">How It's Different</h2>
+            <hr class="rule">
+            <div class="pillars">
+                <div class="pillar"><h3>Built the Old Way</h3><p>Mortise-and-tenon and draw-bore joinery — the way furniture was made before it became disposable.</p></div>
+                <div class="pillar"><h3>Made to Outlast</h3><p>Solid hardwood, built to be handed down — not the flat-pack furniture you replace every few years.</p></div>
+                <div class="pillar"><h3>Local &amp; Reclaimed Wood</h3><p>Carolina hardwoods and reclaimed lumber. The first table's walnut was harvested in Laurens, South Carolina.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE MAKER -->
+    <section>
+        <div class="inner">
+            <h2 class="heading">The Maker</h2>
+            <hr class="rule">
+            <div class="maker-grid">
+                <div>
+                    <p>Right out of college, Cole Fisher went to work for Habitat for Humanity, leading crews salvaging antique heart pine floor joists from razed homes to build tables for Habitat's annual auction. He loved that part more than he expected.</p>
+                    <p>A recently acquired MBA helped land Cole a job at PwC in the Cyber, Risk, Regulatory, and Financial Crimes practice — eleven years, five as a senior manager. C-suite clients, big cities, fancy meals. The suits were sharp. The weekends were theoretical. He never put down his tools.</p>
+                    <p>Then an unexpected layoff created an unexpected opportunity. When Cole told everyone he was leaving consulting to build furniture, the only surprise was that it took him this long.</p>
+                    <p>He'd spent a decade on work that didn't last. Now he builds things that do.</p>
+                    <p class="closer">Leave something that matters.</p>
+                </div>
+                <div>
+                    <img src="../images/press-maker.jpg" alt="Cole Fisher milling a walnut slab at the jointer in the Wood Sugar Company shop">
+                    <p class="maker-cap">Cole Fisher milling a walnut slab at the jointer — Chapin, SC.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAST FACTS -->
+    <section class="alt">
+        <div class="inner">
+            <h2 class="heading">Fast Facts</h2>
+            <hr class="rule">
+            <table class="facts">
+                <tr><th>Founded</th><td>2026 &middot; Chapin, South Carolina</td></tr>
+                <tr><th>Creator / Craftsman / Person-in-the-loop</th><td>Cole Fisher &mdash; sole maker; former PwC Risk and Regulatory Senior Manager</td></tr>
+                <tr><th>What we make</th><td>Heirloom dining &amp; farm tables &mdash; plus cutting boards and smaller goods from the offcuts</td></tr>
+                <tr><th>Materials</th><td>Locally sourced hardwoods and reclaimed lumber</td></tr>
+                <tr><th>Joinery</th><td>Mortise-and-tenon, draw-bore, wedged through-tenon</td></tr>
+                <tr><th>Finish</th><td>Plant-based hardwax oil</td></tr>
+                <tr><th>Maker's mark</th><td>Brass builder's plate &mdash; harvest location, species, finish, year, craftsman, family, and the motto <em>RELINQUE &middot; QUOD &middot; DURAT</em></td></tr>
+                <tr><th>Price</th><td>Varies by materials and style</td></tr>
+                <tr><th>First table</th><td>Sold May 2026 &mdash; a solid black walnut dining table, its wood harvested in Laurens, SC, to a Chapin family</td></tr>
+                <tr><th>Online</th><td>woodsugarco.com &middot; @woodsugarco on Instagram, Facebook, YouTube, Pinterest, TikTok</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- IN COLE'S WORDS -->
+    <section>
+        <div class="inner">
+            <h2 class="heading">In Cole's Words</h2>
+            <hr class="rule">
+            <p class="quote">For the first time in my professional life, I want to work for me.</p>
+            <p class="quote">What if I could automate the things I don't want to do, so I can do the things that matter?</p>
+            <p class="quote">Real joinery. Real craftsmanship. Real, heirloom-quality tables built to last generations.</p>
+        </div>
+    </section>
+
+    <!-- IMAGES -->
+    <section class="alt">
+        <div class="inner">
+            <h2 class="heading">Images</h2>
+            <hr class="rule">
+            <div class="gallery">
+                <figure class="wide">
+                    <img src="../images/press-table.jpg" alt="Solid black walnut dining table with ladder-back chairs">
+                    <figcaption>The first table — solid black walnut, with the ladder-back chairs.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../images/press-staged.jpg" alt="Walnut table staged in a room">
+                    <figcaption>Staged — the table at home.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../images/press-detail.jpg" alt="Walnut grain, ladder-back chair, shadow and contrast">
+                    <figcaption>Grain, ladder-back, and shadow.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../images/press-grain.jpg" alt="Walnut surface detail">
+                    <figcaption>Surface detail.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../images/press-cuttingboard.jpg" alt="Cutting board branded with the Wood Sugar Co mark">
+                    <figcaption>A cutting board from the offcuts — stamped with the Wood Sugar Co mark.</figcaption>
+                </figure>
+            </div>
+            <p class="chairnote">The ladder-back chairs in this photograph are the work of Archie Hunter, a third-generation chairmaker from Florence, South Carolina. Cole's mother bought them new from the Hunters in 1975, to match two rocking chairs her grandparents purchased 40 years before. Simple, well-made, and beautiful — South Carolina grown.</p>
+            <p class="usage">Free for editorial use with credit to <em>Wood Sugar Company, Chapin, SC</em>. High-resolution originals available on request. Commercial / advertising use by written permission only.</p>
+        </div>
+    </section>
+
+    <!-- LATEST / RELEASE -->
+    <section>
+        <div class="inner">
+            <h2 class="heading">Latest</h2>
+            <hr class="rule">
+            <div class="release">
+                <p class="stamp">For Immediate Release</p>
+                <h3>Big Four to Backwoods: South Carolina Furniture Studio Lands First Sale</h3>
+                <p><strong>CHAPIN, S.C.</strong> &mdash; A walnut dining table built to be handed down for generations &mdash; joined by hand, without a single metal fastener &mdash; sold from a small workshop in Chapin, South Carolina, the first sale for Wood Sugar Company, an heirloom furniture studio founded by a former PwC Risk and Regulatory Senior Manager who left consulting in 2026 to build furniture full-time.</p>
+                <p>The table &mdash; built from black walnut harvested in Laurens, South Carolina &mdash; sold to a Chapin family. It is joined entirely with traditional mortise-and-tenon and draw-bore work, finished in plant-based hardwax oil, and carries a brass builder's plate engraved with the species, the year, the family it was built for, and a Latin inscription: <em>RELINQUE &middot; QUOD &middot; DURAT</em>.</p>
+                <p>Fisher runs the studio's back office with AI &mdash; the same kind of technology that upended his old industry &mdash; so his hands stay free for the bench. But the furniture itself is deliberately old: built to outlast the person who bought it, signed by its maker, and made to be handed down. <em>&ldquo;Leave something that matters,&rdquo;</em> as he puts it.</p>
+                <p style="margin-bottom:0;"><a href="mailto:hello@woodsugarco.com">Request the full release &amp; an interview &rarr;</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESS CONTACT -->
+    <section class="alt">
+        <div class="inner contact-block">
+            <h2 class="heading">Press Contact</h2>
+            <hr class="rule" style="margin-left:auto;margin-right:auto;">
+            <p>For interviews, a shop visit, or high-resolution images:</p>
+            <p class="contact-email"><a href="mailto:hello@woodsugarco.com">hello@woodsugarco.com</a></p>
+            <p>Cole Fisher &middot; Wood Sugar Company &middot; Chapin, South Carolina</p>
+            <div class="social">
+                <a href="https://instagram.com/woodsugarco" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                <a href="https://facebook.com/woodsugarco" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <a href="https://youtube.com/@woodsugarco" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                <a href="https://pinterest.com/woodsugarco" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641 0 12.017 0z"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="colophon-latin">RELINQUE &middot; QUOD &middot; DURAT</p>
+        <p class="colophon-en">Leave what endures.</p>
+        <p class="colophon-slogan">Leave something that matters.</p>
+        <p class="colophon-meta">Wood Sugar Company &middot; Chapin, South Carolina &middot; 2026</p>
+    </footer>
+
+</body>
+</html>
