@@ -8,7 +8,24 @@
     <meta property="og:title" content="Wood Sugar Company — Heirloom Hardwood Tables">
     <meta property="og:description" content="Walnut and white oak dining tables, joined the old way. Chapin, South Carolina.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="images/hero-walnut.jpg">
+    <meta property="og:url" content="https://woodsugarco.com/">
+    <meta property="og:image" content="https://woodsugarco.com/images/hero-walnut.jpg">
+    <link rel="canonical" href="https://woodsugarco.com/">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Wood Sugar Company",
+        "description": "Heirloom hardwood dining tables built by hand in Chapin, South Carolina. Traditional joinery, locally sourced hardwood.",
+        "url": "https://woodsugarco.com/",
+        "email": "hello@woodsugarco.com",
+        "image": "https://woodsugarco.com/images/hero-walnut.jpg",
+        "founder": { "@type": "Person", "name": "Cole Fisher" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Chapin", "addressRegion": "SC", "addressCountry": "US" },
+        "sameAs": ["https://instagram.com/woodsugarco"]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -616,6 +633,84 @@
         }
 
         /* ========================================
+           RECENT WORK
+           ======================================== */
+        .recent-work {
+            background-color: var(--bg-primary);
+            padding-top: 0;
+        }
+
+        .recent-work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .recent-work-grid figure {
+            margin: 0;
+        }
+
+        .recent-work-grid img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.9) saturate(0.9);
+        }
+
+        .recent-work-grid figcaption {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* ========================================
+           PRESS BAND
+           ======================================== */
+        .press-band {
+            background-color: var(--bg-primary);
+            text-align: center;
+            padding: 4.5rem 2rem;
+            border-top: 1px solid rgba(140, 123, 69, 0.15);
+            border-bottom: 1px solid rgba(140, 123, 69, 0.15);
+        }
+
+        .press-kicker {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .press-quote {
+            font-family: var(--display);
+            font-style: normal;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            max-width: 640px;
+            margin: 0 auto 1.4rem;
+            line-height: 1.5;
+        }
+
+        .press-link {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brass);
+            text-decoration: none;
+            border-bottom: 1px solid var(--brass-dark);
+            padding-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .press-link:hover {
+            color: var(--brass-light);
+        }
+
+        /* ========================================
            RESPONSIVE
            ======================================== */
         @media (max-width: 768px) {
@@ -658,6 +753,15 @@
             .hero-cta {
                 padding: 0.9rem 2.2rem;
             }
+
+            .recent-work-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .press-quote {
+                font-size: 1.2rem;
+            }
         }
 
         /* ========================================
@@ -689,9 +793,9 @@
                     </div>
                 </div>
             </div>
-            <h1 class="hero-headline">Heirloom quality tables.<br>Built by hand. Zero metal fasteners.</h1>
+            <h1 class="hero-headline">Heirloom hardwood tables.<br>Joined the old way. Made to be handed down.</h1>
             <p class="hero-subline">Built for Generations<br>Chapin, South Carolina</p>
-            <a href="#contact" class="hero-cta">Get on the List</a>
+            <a href="#contact" class="hero-cta">Start the Conversation</a>
         </div>
         <div class="hero-scroll-hint">
             <span></span>
@@ -708,9 +812,31 @@
                 <div class="the-work-text">
                     <h2 class="section-heading reveal">What We Build</h2>
                     <hr class="section-rule reveal reveal-delay-1">
-                    <p class="reveal reveal-delay-2">Every table begins with locally sourced hardwoods. No veneers. No plywood. No metal fasteners. Traditional joinery executed by a craftsman building functional art&nbsp;&mdash; built to outlast the house it sits in.</p>
+                    <p class="reveal reveal-delay-2">Every table begins with locally sourced hardwood. No veneer, no plywood&nbsp;&mdash; and not a single metal fastener. Traditional joinery, cut and fitted by one maker, built to outlast the house it sits in.</p>
                     <p class="on-the-bench reveal reveal-delay-3">Real wood. Real joinery. Real simple.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ RECENT WORK ============ -->
+    <section class="recent-work">
+        <div class="section-inner">
+            <h2 class="section-heading reveal" style="text-align: center;">The First Table</h2>
+            <hr class="section-rule reveal reveal-delay-1" style="margin-left: auto; margin-right: auto;">
+            <div class="recent-work-grid">
+                <figure class="reveal reveal-delay-1">
+                    <img src="images/reveal/walnut/2-top-laid-up.jpg" alt="Solid walnut table top laid up in the workshop" loading="lazy">
+                    <figcaption>The top, laid up &mdash; solid Carolina walnut</figcaption>
+                </figure>
+                <figure class="reveal reveal-delay-2">
+                    <img src="images/reveal/walnut/6-finished-table.jpg" alt="Finished solid walnut dining table" loading="lazy">
+                    <figcaption>Finished &mdash; and sold. Chapin, South Carolina</figcaption>
+                </figure>
+                <figure class="reveal reveal-delay-3">
+                    <img src="images/reveal/walnut/4-detail.jpg" alt="Tapered walnut leg and table edge in afternoon light" loading="lazy">
+                    <figcaption>Tapered leg, afternoon light</figcaption>
+                </figure>
             </div>
         </div>
     </section>
@@ -725,13 +851,22 @@
                     <p class="reveal reveal-delay-2">Right out of college, Cole went to work for Habitat for Humanity. Every year, Cole led crews salvaging antique heart pine floor joists from razed homes to build tables for Habitat's annual auction. He loved that part more than he expected.</p>
                     <p class="reveal reveal-delay-3">A recently acquired MBA helped land Cole a job at PwC in the Cyber, Risk, Regulatory, and Financial Crimes practice. C-suite clients, big cities, fancy meals. The suits were sharp. The weekends were theoretical. He never put down his tools.</p>
                     <p class="reveal reveal-delay-3">Then an unexpected layoff created an unexpected opportunity. When Cole told everyone he was leaving consulting to build furniture, the only surprise was that it took him this long.</p>
-                    <p class="reveal reveal-delay-3">Wood Sugar Company builds heirloom furniture to last generations. Solid hardwood. No metal fasteners. Handcrafted in Chapin, South&nbsp;Carolina.</p>
+                    <p class="reveal reveal-delay-3">Wood Sugar Company builds heirloom furniture to last generations. Solid hardwood, joined the old way, built by hand in Chapin, South&nbsp;Carolina&nbsp;&mdash; and every piece carries a brass plaque naming the maker who built it and the family it was built for.</p>
                     <p class="on-the-bench reveal reveal-delay-3">Leave something that matters.</p>
                 </div>
                 <div class="the-maker-image reveal">
-                    <img src="images/walnut-grain.jpg" alt="Close-up of walnut grain showing the rich character of locally sourced hardwood" loading="lazy">
+                    <img src="images/press/freetimes-2026-07-maker-portrait.jpg" alt="Cole Fisher, maker, in the Wood Sugar Company workshop in Chapin, South Carolina" loading="lazy">
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ============ PRESS BAND ============ -->
+    <section class="press-band">
+        <div class="section-inner">
+            <p class="press-kicker reveal">As featured in Free Times &middot; The Post and Courier</p>
+            <p class="press-quote reveal reveal-delay-1">&ldquo;From consulting to crafting: How a Chapin resident went from a top firm to building heirloom tables&rdquo;</p>
+            <a class="press-link reveal reveal-delay-2" href="https://www.postandcourier.com/free-times/free-times/news/custom-wood-table-furniture-chapin-sc/article_280b6c54-038d-4093-8420-0856464ad27d.html" target="_blank" rel="noopener">Read the feature &mdash; July 2026</a>
         </div>
     </section>
 
@@ -743,15 +878,15 @@
             <div class="different-grid">
                 <div class="different-item reveal reveal-delay-1">
                     <h3>Traditional Joinery</h3>
-                    <p>Mortise and tenon. Dovetail. Draw-bore. The joints our great-grandfathers trusted&nbsp;&mdash; because they work.</p>
+                    <p>Mortise and tenon, locked with draw-bore pins. The joints our great-grandfathers trusted&nbsp;&mdash; because they work.</p>
                 </div>
                 <div class="different-item reveal reveal-delay-2">
-                    <h3>Zero Metal Fasteners</h3>
-                    <p>Not a single screw, nail, or bolt in any piece. Every connection is wood to wood.</p>
+                    <h3>Signed by the Maker</h3>
+                    <p>Every piece carries a brass plaque naming the craftsman who built it and the family it was built for. You know exactly whose hands made your table.</p>
                 </div>
                 <div class="different-item reveal reveal-delay-3">
                     <h3>Locally Sourced Hardwood</h3>
-                    <p>Walnut, oak, and other reclaimed hardwoods from the Carolinas; milled and dried before they ever meet a hand plane.</p>
+                    <p>Walnut, oak, and heart pine from the Carolinas; milled and dried before they ever meet a hand plane.</p>
                 </div>
             </div>
         </div>
