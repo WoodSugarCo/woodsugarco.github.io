@@ -777,7 +777,10 @@
 
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+                    <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel"
+                           placeholder="(803) 555-0142" maxlength="14"
+                           pattern="\(\d{3}\) \d{3}-\d{4}"
+                           title="Enter a 10-digit phone number, area code first" required>
                 </div>
 
                 <div class="form-group">
@@ -857,6 +860,17 @@
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // Phone auto-format: (XXX) XXX-XXXX
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', () => {
+            const d = phoneInput.value.replace(/\D/g, '').replace(/^1/, '').slice(0, 10);
+            let out = d;
+            if (d.length > 6) out = `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+            else if (d.length > 3) out = `(${d.slice(0, 3)}) ${d.slice(3)}`;
+            else if (d.length > 0) out = `(${d}`;
+            phoneInput.value = out;
+        });
     </script>
 </body>
 </html>
