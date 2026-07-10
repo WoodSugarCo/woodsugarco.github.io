@@ -570,6 +570,58 @@
             transform: translateY(-2px);
         }
 
+        .form-submit:disabled {
+            background-color: var(--brass-dark);
+            cursor: default;
+            transform: none;
+        }
+
+        .form-error {
+            margin-top: 1.2rem;
+            padding: 1rem 1.2rem;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background-color: var(--bg-elevated);
+            border-left: 3px solid var(--brass);
+        }
+
+        .form-error a {
+            color: var(--brass-light);
+            text-decoration: underline;
+        }
+
+        .form-success {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background-color: var(--bg-elevated);
+            border: 1px solid var(--bg-surface);
+            border-top: 3px solid var(--brass);
+        }
+
+        .form-success h3 {
+            font-family: var(--display);
+            font-style: normal;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .form-success p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 34em;
+            margin: 0 auto 0.6rem;
+        }
+
+        .form-success .form-success-sig {
+            margin-top: 1.4rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
         /* ========================================
            FOOTER
            ======================================== */
@@ -940,7 +992,18 @@
                 </div>
 
                 <button type="submit" class="form-submit">Send It</button>
+
+                <p class="form-error" id="form-error" hidden>
+                    Something went wrong on our end and your note didn't send.
+                    Email me directly at <a href="mailto:hello@woodsugarco.com">hello@woodsugarco.com</a> and I'll get right back to you.
+                </p>
             </form>
+
+            <div class="form-success" id="form-success" hidden>
+                <h3>Got it &mdash; thank you.</h3>
+                <p>Your note is in my inbox. I read every inquiry personally, and you'll hear back from me within 48 hours.</p>
+                <p class="form-success-sig">&mdash; Cole Fisher, Wood Sugar Company</p>
+            </div>
         </div>
     </section>
 
@@ -1005,6 +1068,34 @@
             else if (d.length > 3) out = `(${d.slice(0, 3)}) ${d.slice(3)}`;
             else if (d.length > 0) out = `(${d}`;
             phoneInput.value = out;
+        });
+
+        // Contact form: submit in the background, show inline thank-you.
+        // Never leaves the page — same experience on phone and desktop.
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('.form-submit');
+            const errorBox = document.getElementById('form-error');
+            errorBox.hidden = true;
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            try {
+                const res = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!res.ok) throw new Error('Formspree responded ' + res.status);
+                contactForm.hidden = true;
+                const success = document.getElementById('form-success');
+                success.hidden = false;
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (err) {
+                errorBox.hidden = false;
+                btn.disabled = false;
+                btn.textContent = 'Send It';
+            }
         });
     </script>
 </body>
