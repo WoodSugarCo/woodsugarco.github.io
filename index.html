@@ -443,16 +443,36 @@
             outline-offset: 2px;
         }
 
-        /* Corner badge — image count on carousels, a play mark on reels. */
+        /* Corner badge — image count on carousels, a play mark on reels.
+           Cole 7/21: the old glyph didn't read as "more photos in here", so
+           the count now sits on a pill next to a stacked-frames icon. */
         .feed-badge {
             position: absolute;
             top: 0.5rem;
-            right: 0.6rem;
+            right: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.28rem;
+            padding: 0.2rem 0.45rem;
+            border-radius: 3px;
+            background-color: rgba(12, 12, 11, 0.62);
             color: var(--linen);
             font-family: var(--body);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            line-height: 1;
             letter-spacing: 0.02em;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+            pointer-events: none;
+        }
+
+        .feed-badge svg { display: block; }
+
+        /* Whole-tile hint so a multi-photo post is obvious before clicking. */
+        .feed-tile.is-multi::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(245, 240, 232, 0.28);
+            border-radius: 2px;
             pointer-events: none;
         }
 
@@ -530,6 +550,47 @@
 
         .lb-meta a { color: var(--brass); text-decoration: none; }
         .lb-meta a:hover { color: var(--brass-light); }
+
+        /* Bubble dots — Cole 7/21: without these you can't tell whether the
+           arrows move through THIS post or across the whole grid. One dot per
+           photo in the post, so the scope of the arrows is visible. */
+        .lb-dots {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            max-width: 90vw;
+        }
+
+        .lb-dots.show { display: flex; }
+
+        .lb-dot {
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border-radius: 50%;
+            border: 1px solid var(--weathered-oak);
+            background: transparent;
+            cursor: pointer;
+            opacity: 0.55;
+            transition: opacity 0.15s ease, background-color 0.15s ease;
+        }
+
+        .lb-dot:hover { opacity: 0.9; }
+
+        .lb-dot.current {
+            background-color: var(--brass);
+            border-color: var(--brass);
+            opacity: 1;
+        }
+
+        .lb-scope {
+            color: var(--text-muted);
+            font-family: var(--body);
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
 
         .lb-close,
         .lb-nav {
@@ -1085,6 +1146,8 @@
         <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button>
         <div class="lb-stage">
             <img class="lb-img" id="lb-img" src="" alt="">
+            <div class="lb-dots" id="lb-dots"></div>
+            <p class="lb-scope" id="lb-scope"></p>
             <p class="lb-cap" id="lb-cap"></p>
             <p class="lb-meta" id="lb-meta"></p>
         </div>
@@ -1256,6 +1319,8 @@
             const lbImg = document.getElementById('lb-img');
             const lbCap = document.getElementById('lb-cap');
             const lbMeta = document.getElementById('lb-meta');
+            const lbDots = document.getElementById('lb-dots');
+            const lbScope = document.getElementById('lb-scope');
             const prevBtn = document.getElementById('lb-prev');
             const nextBtn = document.getElementById('lb-next');
 
@@ -1269,16 +1334,24 @@
                 .then(r => r.ok ? r.json() : Promise.reject(r.status))
                 .then(data => {
                     posts = data.posts || [];
+                    // Stacked frames = "there are more photos inside this one".
+                    const stackIcon = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">'
+                        + '<rect x="3.2" y="0.8" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.2"/>'
+                        + '<rect x="0.8" y="3.2" width="8" height="8" rx="1.4" fill="rgba(12,12,11,0.62)" stroke="currentColor" stroke-width="1.2"/>'
+                        + '</svg>';
                     grid.innerHTML = posts.map((p, i) => {
                         const isVideo = p.type === 'video';
-                        const badge = isVideo ? '&#9654;'
-                            : (p.images.length > 1 ? p.images.length + '&#8202;&#9633;' : '');
+                        const multi = p.images.length > 1;
+                        const badge = isVideo
+                            ? '<span class="feed-badge">&#9654;</span>'
+                            : (multi ? `<span class="feed-badge">${stackIcon}${p.images.length}</span>` : '');
                         const alt = p.caption
                             ? p.caption.split('\n')[0].slice(0, 110)
                             : 'Wood Sugar Company shop photo';
-                        return `<button class="feed-tile" data-i="${i}" aria-label="${alt.replace(/"/g, '&quot;')}">
+                        const label = (multi ? `${p.images.length} photos — ` : '') + alt;
+                        return `<button class="feed-tile${multi ? ' is-multi' : ''}" data-i="${i}" aria-label="${label.replace(/"/g, '&quot;')}">
                             <img src="${p.images[0]}" alt="${alt.replace(/"/g, '&quot;')}" loading="lazy">
-                            ${badge ? `<span class="feed-badge">${badge}</span>` : ''}
+                            ${badge}
                         </button>`;
                     }).join('');
 
@@ -1312,8 +1385,29 @@
                 lbImg.alt = post.caption ? post.caption.split('\n')[0].slice(0, 140) : '';
                 lbCap.textContent = post.caption || '';
                 const many = post.images.length > 1;
+
+                // Say plainly what the arrows do — they move within THIS post,
+                // never across the grid. Dots make the same thing visible.
+                lbScope.textContent = many
+                    ? `Photo ${idx + 1} of ${post.images.length} in this post`
+                    : '';
+                lbDots.classList.toggle('show', many);
+                if (many) {
+                    lbDots.innerHTML = post.images.map((_, n) =>
+                        `<button class="lb-dot${n === idx ? ' current' : ''}" data-n="${n}"
+                            aria-label="Photo ${n + 1} of ${post.images.length}"></button>`).join('');
+                    lbDots.querySelectorAll('.lb-dot').forEach(d => {
+                        d.addEventListener('click', e => {
+                            e.stopPropagation();
+                            idx = +d.dataset.n;
+                            render();
+                        });
+                    });
+                } else {
+                    lbDots.innerHTML = '';
+                }
+
                 lbMeta.innerHTML = prettyDate(post.date)
-                    + (many ? ` &middot; ${idx + 1} of ${post.images.length}` : '')
                     + (post.permalink ? ` &middot; <a href="${post.permalink}" target="_blank" rel="noopener">View on Instagram</a>` : '');
                 const show = many ? '' : 'none';
                 prevBtn.style.display = show;
