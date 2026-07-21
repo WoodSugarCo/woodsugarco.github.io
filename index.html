@@ -476,6 +476,57 @@
             pointer-events: none;
         }
 
+        /* Bubble dots ON THE TILE (Cole 7/21): scanning the grid, you should
+           be able to tell a single photo from a 7-photo post from a reel
+           without clicking. One dot per photo, bottom-centre. */
+        .feed-dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.28rem;
+            pointer-events: none;
+        }
+
+        .feed-dots i {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: rgba(245, 240, 232, 0.9);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+        }
+
+        .feed-dots i:first-child {
+            background-color: var(--brass-light);
+        }
+
+        /* Reels get a centre play mark — unmistakable at a glance. */
+        .feed-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: rgba(12, 12, 11, 0.55);
+            border: 1.5px solid rgba(245, 240, 232, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .feed-play::before {
+            content: '';
+            border-style: solid;
+            border-width: 8px 0 8px 13px;
+            border-color: transparent transparent transparent var(--linen);
+            margin-left: 3px;
+        }
+
         .feed-actions {
             margin-top: 2.5rem;
             text-align: center;
@@ -1342,13 +1393,18 @@
                     grid.innerHTML = posts.map((p, i) => {
                         const isVideo = p.type === 'video';
                         const multi = p.images.length > 1;
+                        // Three states, three distinct signals: reel = centre
+                        // play mark; multi-photo = count badge + bubble dots;
+                        // single photo = nothing at all.
                         const badge = isVideo
-                            ? '<span class="feed-badge">&#9654;</span>'
-                            : (multi ? `<span class="feed-badge">${stackIcon}${p.images.length}</span>` : '');
+                            ? '<span class="feed-play"></span>'
+                            : (multi ? `<span class="feed-badge">${stackIcon}${p.images.length}</span>`
+                                     + `<span class="feed-dots">${'<i></i>'.repeat(p.images.length)}</span>` : '');
                         const alt = p.caption
                             ? p.caption.split('\n')[0].slice(0, 110)
                             : 'Wood Sugar Company shop photo';
-                        const label = (multi ? `${p.images.length} photos — ` : '') + alt;
+                        const label = isVideo ? `Video — ${alt}`
+                            : (multi ? `${p.images.length} photos — ${alt}` : alt);
                         return `<button class="feed-tile${multi ? ' is-multi' : ''}" data-i="${i}" aria-label="${label.replace(/"/g, '&quot;')}">
                             <img src="${p.images[0]}" alt="${alt.replace(/"/g, '&quot;')}" loading="lazy">
                             ${badge}
