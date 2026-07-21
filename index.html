@@ -391,6 +391,174 @@
         }
 
         /* ========================================
+           SECTION — FROM THE SHOP (Instagram gallery)
+           Rendered from gallery.json, synced by AIOS. Images are SELF-HOSTED:
+           Instagram CDN links are signed and expire, so hotlinking would go
+           blank on its own. Visitors browse the work without an IG account.
+           ======================================== */
+        .shop-feed {
+            background-color: var(--bg-primary);
+        }
+
+        .shop-feed-sub {
+            color: var(--text-secondary);
+            max-width: 46rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .feed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .feed-tile {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background-color: var(--bg-surface);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: block;
+        }
+
+        .feed-tile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, opacity 0.3s ease;
+        }
+
+        .feed-tile:hover img,
+        .feed-tile:focus-visible img {
+            transform: scale(1.04);
+            opacity: 0.85;
+        }
+
+        .feed-tile:focus-visible {
+            outline: 2px solid var(--brass);
+            outline-offset: 2px;
+        }
+
+        /* Corner badge — image count on carousels, a play mark on reels. */
+        .feed-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.6rem;
+            color: var(--linen);
+            font-family: var(--body);
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+            pointer-events: none;
+        }
+
+        .feed-actions {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .feed-ig-link {
+            color: var(--brass);
+            font-family: var(--body);
+            font-size: 1.05rem;
+            letter-spacing: 0.03em;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(140, 123, 69, 0.4);
+            padding-bottom: 2px;
+        }
+
+        .feed-ig-link:hover {
+            color: var(--brass-light);
+            border-bottom-color: var(--brass-light);
+        }
+
+        /* ---- Lightbox ---- */
+        .lb {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background-color: rgba(12, 12, 11, 0.96);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .lb.open { display: flex; }
+
+        .lb-stage {
+            max-width: 1100px;
+            width: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            overflow-y: auto;      /* long captions scroll rather than clip */
+        }
+
+        .lb-img {
+            max-width: 100%;
+            /* Leaves room for caption + date/link beneath — a taller image
+               pushed the "View on Instagram" line off the bottom. */
+            max-height: 58vh;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .lb-cap {
+            color: var(--text-secondary);
+            font-family: var(--body);
+            font-size: 1.02rem;
+            line-height: 1.65;
+            text-align: center;
+            max-width: 46rem;
+            white-space: pre-line;
+        }
+
+        .lb-meta {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .lb-meta a { color: var(--brass); text-decoration: none; }
+        .lb-meta a:hover { color: var(--brass-light); }
+
+        .lb-close,
+        .lb-nav {
+            position: absolute;
+            background: none;
+            border: none;
+            color: var(--linen);
+            font-family: var(--body);
+            cursor: pointer;
+            padding: 0.5rem 0.9rem;
+            line-height: 1;
+            opacity: 0.7;
+        }
+
+        .lb-close:hover, .lb-nav:hover { opacity: 1; }
+        .lb-close { top: 1rem; right: 1.25rem; font-size: 2rem; }
+        .lb-nav { top: 50%; transform: translateY(-50%); font-size: 2.6rem; }
+        .lb-prev { left: 0.5rem; }
+        .lb-next { right: 0.5rem; }
+
+        @media (max-width: 640px) {
+            .feed-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; }
+            .lb-img { max-height: 50vh; }
+            .lb-nav { font-size: 2rem; padding: 0.5rem 0.4rem; }
+            .lb { padding: 3.5rem 0.5rem 1.5rem; }
+            .lb-cap { font-size: 0.95rem; }
+        }
+
+        /* ========================================
            SECTION 3 — THE MAKER
            ======================================== */
         .the-maker {
@@ -893,6 +1061,35 @@
         </div>
     </section>
 
+    <!-- ============ FROM THE SHOP — Instagram gallery ============
+         Populated at runtime from gallery.json (built by AIOS
+         scripts/sync_site_gallery.py). Self-hosted images, no Instagram
+         account required to browse. Reels show their poster frame and open
+         on Instagram; stills and carousels open in the lightbox. -->
+    <section class="shop-feed" id="shop">
+        <div class="section-inner">
+            <h2 class="section-heading reveal">From the Shop</h2>
+            <hr class="section-rule reveal reveal-delay-1">
+            <p class="shop-feed-sub reveal reveal-delay-1">Builds, salvage hauls, and shop days as they happen. Click any photo to see it full size &mdash; no Instagram account needed.</p>
+            <div class="feed-grid reveal reveal-delay-2" id="feed-grid"></div>
+            <div class="feed-actions reveal">
+                <a class="feed-ig-link" href="https://instagram.com/woodsugarco" target="_blank" rel="noopener">Follow along on Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button class="lb-close" id="lb-close" aria-label="Close">&times;</button>
+        <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button>
+        <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button>
+        <div class="lb-stage">
+            <img class="lb-img" id="lb-img" src="" alt="">
+            <p class="lb-cap" id="lb-cap"></p>
+            <p class="lb-meta" id="lb-meta"></p>
+        </div>
+    </div>
+
     <!-- ============ SECTION 2 — THE MAKER ============ -->
     <section class="the-maker">
         <div class="section-inner">
@@ -1042,6 +1239,110 @@
         window.addEventListener('load', () => {
             document.querySelector('.hero').classList.add('loaded');
         });
+
+        /* ============ FROM THE SHOP — gallery + lightbox ============
+           Reads gallery.json (self-hosted images synced from Instagram).
+           A post is one tile; carousels step through their own images in the
+           lightbox. Reels aren't mirrored — their tile opens Instagram. */
+        (function shopFeed() {
+            const grid = document.getElementById('feed-grid');
+            if (!grid) return;
+
+            let posts = [];
+            let post = null;   // post currently open
+            let idx = 0;       // image index within that post
+
+            const lb = document.getElementById('lb');
+            const lbImg = document.getElementById('lb-img');
+            const lbCap = document.getElementById('lb-cap');
+            const lbMeta = document.getElementById('lb-meta');
+            const prevBtn = document.getElementById('lb-prev');
+            const nextBtn = document.getElementById('lb-next');
+
+            const prettyDate = iso => {
+                const [y, m, d] = iso.split('-').map(Number);
+                return new Date(y, m - 1, d).toLocaleDateString('en-US',
+                    { month: 'long', day: 'numeric', year: 'numeric' });
+            };
+
+            fetch('gallery.json')
+                .then(r => r.ok ? r.json() : Promise.reject(r.status))
+                .then(data => {
+                    posts = data.posts || [];
+                    grid.innerHTML = posts.map((p, i) => {
+                        const isVideo = p.type === 'video';
+                        const badge = isVideo ? '&#9654;'
+                            : (p.images.length > 1 ? p.images.length + '&#8202;&#9633;' : '');
+                        const alt = p.caption
+                            ? p.caption.split('\n')[0].slice(0, 110)
+                            : 'Wood Sugar Company shop photo';
+                        return `<button class="feed-tile" data-i="${i}" aria-label="${alt.replace(/"/g, '&quot;')}">
+                            <img src="${p.images[0]}" alt="${alt.replace(/"/g, '&quot;')}" loading="lazy">
+                            ${badge ? `<span class="feed-badge">${badge}</span>` : ''}
+                        </button>`;
+                    }).join('');
+
+                    grid.querySelectorAll('.feed-tile').forEach(t => {
+                        t.addEventListener('click', () => open(+t.dataset.i));
+                    });
+                })
+                .catch(() => {
+                    // Fail quiet and useful — never a broken-looking section.
+                    grid.innerHTML = '<p class="shop-feed-sub">The photo feed is taking a break. ' +
+                        '<a class="feed-ig-link" href="https://instagram.com/woodsugarco" target="_blank" rel="noopener">See the work on Instagram</a></p>';
+                });
+
+            function open(i) {
+                post = posts[i];
+                if (!post) return;
+                // Reels live on Instagram — the poster frame is all we host.
+                if (post.type === 'video') {
+                    window.open(post.permalink, '_blank', 'noopener');
+                    return;
+                }
+                idx = 0;
+                render();
+                lb.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                document.getElementById('lb-close').focus();
+            }
+
+            function render() {
+                lbImg.src = post.images[idx];
+                lbImg.alt = post.caption ? post.caption.split('\n')[0].slice(0, 140) : '';
+                lbCap.textContent = post.caption || '';
+                const many = post.images.length > 1;
+                lbMeta.innerHTML = prettyDate(post.date)
+                    + (many ? ` &middot; ${idx + 1} of ${post.images.length}` : '')
+                    + (post.permalink ? ` &middot; <a href="${post.permalink}" target="_blank" rel="noopener">View on Instagram</a>` : '');
+                const show = many ? '' : 'none';
+                prevBtn.style.display = show;
+                nextBtn.style.display = show;
+            }
+
+            function step(n) {
+                if (!post || post.images.length < 2) return;
+                idx = (idx + n + post.images.length) % post.images.length;
+                render();
+            }
+
+            function close() {
+                lb.classList.remove('open');
+                document.body.style.overflow = '';
+                post = null;
+            }
+
+            document.getElementById('lb-close').addEventListener('click', close);
+            prevBtn.addEventListener('click', e => { e.stopPropagation(); step(-1); });
+            nextBtn.addEventListener('click', e => { e.stopPropagation(); step(1); });
+            lb.addEventListener('click', e => { if (e.target === lb) close(); });
+            document.addEventListener('keydown', e => {
+                if (!lb.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                else if (e.key === 'ArrowLeft') step(-1);
+                else if (e.key === 'ArrowRight') step(1);
+            });
+        })();
 
         // Scroll reveal with Intersection Observer
         const revealElements = document.querySelectorAll('.reveal');
