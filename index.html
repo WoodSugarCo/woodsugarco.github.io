@@ -1619,22 +1619,19 @@
     </script>
 
     <!-- ============ ANALYTICS ============
-         Cloudflare Web Analytics — free on all plans, needs no DNS change,
-         and collects no cookies or localStorage (so no consent banner).
+         Cloudflare Web Analytics — LIVE as of 2026-08-05. Free on all plans,
+         no DNS/nameserver change (beacon only), and it sets no cookies or
+         localStorage, so the site needs no consent banner.
 
-         STAGED, NOT LIVE. To activate, get the token and uncomment:
-           1. dash.cloudflare.com → sign in with GITHUB (that account is
-              Sign-in-with-Apple; there is no Cloudflare password) → Web Analytics
-           2. "Add a site" → hostname: woodsugarco.com → Done
-           3. Manage site → copy the token out of the JS snippet
-           4. Paste it over TOKEN_GOES_HERE below and delete these comment markers
+         Dashboard: dash.cloudflare.com → sign in with GITHUB (that account is
+         Sign-in-with-Apple; there is no Cloudflare password) → Web Analytics.
 
-         The token is a public site identifier — it ships visible in this page's
-         source by design — so it is not a secret to protect.
+         Snippet below is Cloudflare's verbatim, token included — that token is
+         a public site identifier and ships visible in this page's source by
+         design, so it is not a secret.
     -->
-    <!--
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon='{"token": "TOKEN_GOES_HERE"}'></script>
-    -->
+    <!-- Cloudflare Web Analytics -->
+    <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c11ddf5c6acd41ad81f29e9b0ab75c50"}'></script>
+    <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
