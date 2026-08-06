@@ -1054,6 +1054,122 @@
         }
 
         /* ========================================
+           FOR SALE — a finished piece available now.
+           Deliberately no price on the page: the DM/inquiry ask is the
+           mechanic, and a public number here would anchor against
+           commission quotes running at the same time.
+           ======================================== */
+        .for-sale {
+            background-color: var(--bg-elevated);
+            border-top: 1px solid rgba(140, 123, 69, 0.15);
+            border-bottom: 1px solid rgba(140, 123, 69, 0.15);
+        }
+
+        .fs-kicker {
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 1rem;
+        }
+
+        .fs-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        /* height:auto is load-bearing — the width/height attributes on the
+           markup count as a specified height, which makes the browser ignore
+           aspect-ratio entirely and render at full 1350px natural height. */
+        .fs-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(0.95) saturate(0.95);
+        }
+
+        .fs-hero {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: center 42%;
+        }
+
+        .fs-thumbs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .fs-thumbs img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .fs-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .fs-specs {
+            margin: 2rem 0;
+            border-top: 1px solid rgba(140, 123, 69, 0.2);
+        }
+
+        .fs-specs > div {
+            display: grid;
+            grid-template-columns: 9.5rem 1fr;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(140, 123, 69, 0.12);
+        }
+
+        .fs-specs dt {
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding-top: 0.3rem;
+        }
+
+        .fs-specs dd {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .fs-cta {
+            display: inline-block;
+            font-family: var(--body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--linen);
+            background-color: var(--brass);
+            padding: 1.1rem 2.8rem;
+            text-decoration: none;
+            border: 2px solid #1a1a1a;
+            box-shadow: 0 4px 16px rgba(140, 123, 69, 0.3);
+            transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .fs-cta:hover {
+            background-color: var(--brass-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(140, 123, 69, 0.4);
+        }
+
+        .fs-note {
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.03em;
+        }
+
+        /* ========================================
            PRESS BAND
            ======================================== */
         .press-band {
@@ -1144,6 +1260,22 @@
             .recent-work-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+            }
+
+            .fs-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .fs-specs > div {
+                grid-template-columns: 1fr;
+                gap: 0.2rem;
+            }
+
+            .fs-cta {
+                display: block;
+                text-align: center;
+                padding: 1rem 1.5rem;
             }
 
             .press-quote {
@@ -1237,6 +1369,61 @@
                     <img src="images/reveal/walnut/4-detail.jpg" alt="Tapered walnut leg and table edge in afternoon light" width="900" height="1125" loading="lazy" decoding="async">
                     <figcaption>Tapered leg, afternoon light</figcaption>
                 </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOR SALE — available piece ============
+         One finished table, available now. Copy is drawn from the
+         approved 8/06 post — no facts added beyond it. Price is
+         intentionally absent; the CTA routes to the contact form and
+         prefills the project field so the inquiry is attributable. -->
+    <section class="for-sale" id="for-sale">
+        <div class="section-inner">
+            <p class="fs-kicker reveal">Available Now</p>
+            <h2 class="section-heading reveal reveal-delay-1" style="text-align: center;">The Heart Fir Farm Table</h2>
+            <hr class="section-rule reveal reveal-delay-1" style="margin-left: auto; margin-right: auto;">
+
+            <div class="fs-grid">
+                <div class="fs-media reveal reveal-delay-1">
+                    <img class="fs-hero" src="images/heart-fir-table/1-hero-clean.jpg" alt="Reclaimed heart fir farm table with tapered legs, finished, in the Wood Sugar Company workshop" width="1080" height="1350" loading="lazy" decoding="async">
+                    <div class="fs-thumbs">
+                        <img src="images/heart-fir-table/2-grain-nail-holes.jpg" alt="Close view of the heart fir table top showing grain and original nail holes" width="1080" height="1350" loading="lazy" decoding="async">
+                        <img src="images/heart-fir-table/3-side-profile.jpg" alt="Side profile of the heart fir table showing the apron and tapered legs" width="1080" height="1350" loading="lazy" decoding="async">
+                        <img src="images/heart-fir-table/4-top-angle.jpg" alt="Angled view down the heart fir table top" width="1080" height="1350" loading="lazy" decoding="async">
+                    </div>
+                </div>
+
+                <div class="fs-text reveal reveal-delay-2">
+                    <p>72 by 40, built from heart fir joists salvaged out of Brown's Pottery in Arden, North Carolina. That building went up around 1940 and the Browns made pottery in it until 2019 &mdash; the family has been working clay in this country since the 1700s.</p>
+                    <p>Finish is Rubio Monocoat Oil Plus 2C in Pure. No stain on it. That color is eighty years of being a building.</p>
+
+                    <dl class="fs-specs">
+                        <div>
+                            <dt>Size</dt>
+                            <dd>72 &times; 40 inches</dd>
+                        </div>
+                        <div>
+                            <dt>Wood</dt>
+                            <dd>Reclaimed heart fir</dd>
+                        </div>
+                        <div>
+                            <dt>Salvaged from</dt>
+                            <dd>Brown's Pottery &mdash; Arden, North Carolina</dd>
+                        </div>
+                        <div>
+                            <dt>Finish</dt>
+                            <dd>Rubio Monocoat Oil Plus 2C, Pure &mdash; no stain</dd>
+                        </div>
+                        <div>
+                            <dt>Included</dt>
+                            <dd>Brass builder's plate with your family name on it</dd>
+                        </div>
+                    </dl>
+
+                    <a href="#contact" class="fs-cta" id="fs-cta">Ask About This Table</a>
+                    <p class="fs-note">Price on request. The table is in the shop in Chapin, South&nbsp;Carolina.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1577,6 +1764,19 @@
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // For-sale module CTA: prefill the project field so an inquiry about
+        // the available table is attributable in the inbox. Only fills an
+        // empty field — never overwrites what the visitor already typed.
+        const fsCta = document.getElementById('fs-cta');
+        if (fsCta) {
+            fsCta.addEventListener('click', () => {
+                const project = document.getElementById('project');
+                if (project && !project.value.trim()) {
+                    project.value = "I'm interested in the Heart Fir farm table (72 x 40).";
+                }
+            });
+        }
 
         // Phone auto-format: (XXX) XXX-XXXX
         const phoneInput = document.getElementById('phone');
